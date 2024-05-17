@@ -10,4 +10,6 @@ import com.bankaApp.Model.Client;
 @Repository
 public interface ClientRepository extends JpaRepository<Client,Integer> {
 
+	Client findByMail(String mail);
+	Client findById(int id);
 }

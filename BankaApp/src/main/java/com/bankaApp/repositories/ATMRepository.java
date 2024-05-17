@@ -8,4 +8,6 @@ import com.bankaApp.Model.ATM;
 @Repository 
 public interface ATMRepository extends JpaRepository<ATM,Integer> {
 
+	ATM findById(int id);
+	ATM findByName(String name);
 }

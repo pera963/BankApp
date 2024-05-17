@@ -8,4 +8,5 @@ import com.bankaApp.Model.Account;
 @Repository
 public interface AccountRepository extends JpaRepository<Account,Integer> {
 
+	Account findById(int id);
 }

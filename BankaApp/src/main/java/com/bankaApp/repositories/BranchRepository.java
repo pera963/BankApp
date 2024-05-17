@@ -8,4 +8,5 @@ import com.bankaApp.Model.Branch;
 @Repository
 public interface BranchRepository extends JpaRepository<Branch,Integer> {
 
+	Branch findById(int id);
 }
