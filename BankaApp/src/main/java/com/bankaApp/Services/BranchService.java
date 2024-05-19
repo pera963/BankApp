@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.bankaApp.Model.ATM;
 import com.bankaApp.Model.Branch;
+import com.bankaApp.Model.Client;
 import com.bankaApp.repositories.BranchRepository;
 
 @Service
@@ -24,5 +25,9 @@ public class BranchService {
 		Branch branch = branchRepository.findById(id);
 		return branch;
 	}
-	
+	 public Branch getBranchByName(String name) {
+			
+			Branch branch =branchRepository.findByName(name);
+			   return branch;
+		}
 }
