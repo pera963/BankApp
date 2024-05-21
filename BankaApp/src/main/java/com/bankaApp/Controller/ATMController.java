@@ -51,5 +51,21 @@ public class ATMController {
 			 return new ResponseEntity<ATM>(atm,HttpStatus.OK);
 		}
 	}
+	
+	@GetMapping("/ByBranchAddress")
+	public ResponseEntity<List<ATM>> getAllAtmByBranchAddresss(@RequestParam String address){
+		List<ATM> atms = atmService.getAllAtmBranchAddress(address);
+		return new ResponseEntity<List<ATM>>(atms,HttpStatus.OK);
+		
+		
+	}
+	
+	@GetMapping("/ByActiveStatusTrue")
+	public ResponseEntity<List<ATM>> getAllActiveAtm(){
+		List<ATM> atms = atmService.getAllActiveAtm();
+		return new ResponseEntity<List<ATM>>(atms,HttpStatus.OK);
+		
+		
+	}
 }
 

@@ -75,9 +75,32 @@ public class ClientController {
      @GetMapping("/ByNameAndSurname") 
         public ResponseEntity<List<Client>> getClientByNameAndSurname(@RequestParam String name,@RequestParam String surname){
     	     List<Client> clients = clientService.getClientbyNameAndSurname(name, surname);
-    	     return new ResponseEntity<List<Client>>(clients,HttpStatus.OK);
+    	     if(clients.isEmpty()) {
+    	    	return new ResponseEntity<List<Client>>(HttpStatus.NOT_FOUND);	 
+    	     }
+    	     else {
+    	    	 return new ResponseEntity<List<Client>>(clients,HttpStatus.OK); 
+    	     }  
+    	     
+    	    
     	 
      }
 
+     @GetMapping("/ByMailAndPassword") 
+        public ResponseEntity<Client> getClientByMailAndPassword(@RequestParam String mail,@RequestParam String password){
+ 	       Client client = clientService.getClientByMailAndPassword(mail, password);
+ 	       if(client==null) {
+ 	    	  return new ResponseEntity<Client>(HttpStatus.NOT_FOUND);
+ 	       } 
+ 	       else {
+ 	    	  return new ResponseEntity<Client>(client,HttpStatus.OK); 
+ 	       } 
+ 	       
+ 	   }
+
+
+
+
 }
+
 

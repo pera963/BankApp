@@ -46,4 +46,11 @@ public class ClientService {
     	return client;
     }
 	
+    public Client getClientByMailAndPassword(String mail,String password) {
+    	
+    	Client client = clientRepository.findByMailAndPassword(mail, password);
+    	return client;
+    }
+
+
 }

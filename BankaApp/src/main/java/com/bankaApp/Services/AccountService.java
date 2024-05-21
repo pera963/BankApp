@@ -25,4 +25,9 @@ public class AccountService {
 		Account account = accountRepository.findById(id);
 		return account;
 	}
+	
+	public List<Account> grtAllAccountByClientMail(String mail){
+		List<Account> accounts = accountRepository.findByClientMail(mail);
+		return accounts;
+	}
 }

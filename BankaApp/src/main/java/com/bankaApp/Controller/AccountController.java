@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bankaApp.Model.Account;
@@ -37,5 +38,12 @@ public class AccountController {
     	else {
     		return new ResponseEntity<Account>(account,HttpStatus.OK);
     	}
+    }
+   
+    @GetMapping("/ByClientMail")
+    public ResponseEntity<List<Account>> getAllAccountByClientMail(@RequestParam String mail){
+    	List<Account> accounts = accountService.grtAllAccountByClientMail(mail);
+    	return new ResponseEntity<List<Account>>(accounts,HttpStatus.OK);
+    	
     }
 }

@@ -29,4 +29,16 @@ public class ATMService {
 		ATM atm =atmRepository.findByName(name);
 		   return atm;
 	}
+	
+	public List<ATM> getAllAtmBranchAddress (String address){
+		List<ATM> atms = atmRepository.findByBranchAddress(address);
+		return atms;
+		
+	}
+	public List<ATM> getAllActiveAtm(){
+		List<ATM> atms = atmRepository.findByActiveStatusTrue();
+		return atms;
+		
+	}
+	
 }
