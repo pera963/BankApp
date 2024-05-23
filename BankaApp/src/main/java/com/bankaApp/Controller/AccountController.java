@@ -46,4 +46,17 @@ public class AccountController {
     	return new ResponseEntity<List<Account>>(accounts,HttpStatus.OK);
     	
     }
+    @GetMapping("/ByAccountTypeDev")    
+    public ResponseEntity<List<Account>> getAllAccountByAccountTypeDev(){
+    	List<Account> accounts = accountService.getAllAccountByAccountTypeDev();
+    	return new ResponseEntity<List<Account>>(accounts,HttpStatus.OK);
+    }
 }
+
+
+
+
+
+
+
+

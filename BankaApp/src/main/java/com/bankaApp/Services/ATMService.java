@@ -41,4 +41,17 @@ public class ATMService {
 		
 	}
 	
+	public List<ATM> getAllActiveATMByQuery(){
+		List<ATM> atms = atmRepository.findByActiveStatus();
+		return atms;
+		
+	}
+	
+	public List<ATM> getAllActiveATMAndBalanceByQuery(){
+		List<ATM> atms = atmRepository.findByActiveStatusAndBalance();
+		return atms;
+		
+	}
+	
+	
 }

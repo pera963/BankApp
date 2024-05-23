@@ -67,5 +67,22 @@ public class ATMController {
 		
 		
 	}
+	
+	@GetMapping("/ByActiveStatusQuery")
+	public ResponseEntity<List<ATM>> getAllActiveAtmByQuery(){
+		List<ATM> atms = atmService.getAllActiveATMByQuery();
+		return new ResponseEntity<List<ATM>>(atms,HttpStatus.OK);
+		
+		
+	}
+	
+	@GetMapping("/ByActiveStatusAndBalanceQuery")
+	public ResponseEntity<List<ATM>> getAllActiveAtmAndBalanceByQuery(){
+		List<ATM> atms = atmService.getAllActiveATMAndBalanceByQuery();
+		return new ResponseEntity<List<ATM>>(atms,HttpStatus.OK);
+		
+		
+	}
+	
 }
 

@@ -30,4 +30,11 @@ public class AccountService {
 		List<Account> accounts = accountRepository.findByClientMail(mail);
 		return accounts;
 	}
+	
+	public List<Account> getAllAccountByAccountTypeDev(){
+		List<Account> accounts = accountRepository.findByAccountType();
+		return accounts;
+		
+	}
 }
+
