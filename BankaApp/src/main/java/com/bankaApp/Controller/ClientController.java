@@ -7,10 +7,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bankaApp.DTOS.ClientDTO;
 import com.bankaApp.Model.ATM;
 import com.bankaApp.Model.Branch;
 import com.bankaApp.Model.Client;
@@ -86,7 +89,8 @@ public class ClientController {
     	 
      }
 
-     @GetMapping("/ByMailAndPassword") 
+   //  @GetMapping("/ByMailAndPassword") 
+       @GetMapping("/login") 
         public ResponseEntity<Client> getClientByMailAndPassword(@RequestParam String mail,@RequestParam String password){
  	       Client client = clientService.getClientByMailAndPassword(mail, password);
  	       if(client==null) {
@@ -97,6 +101,18 @@ public class ClientController {
  	       } 
  	       
  	   }
+       
+       @PostMapping("/registration")
+       public ResponseEntity<Client> registration(@RequestBody ClientDTO clientDto){
+    	   Client client =clientService.createClient(clientDto);
+    	   if(client==null) {
+    		   return new ResponseEntity<Client>(HttpStatus.BAD_REQUEST);   
+    	   }
+    	   else {
+    		   return new ResponseEntity<Client>(client,HttpStatus.OK);   
+    		   
+    	   }
+       }
 
 
 

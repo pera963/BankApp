@@ -1,18 +1,10 @@
-package com.bankaApp.Model;
+package com.bankaApp.DTOS;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+public class ClientDTO {
 
-@Entity
-public class Client {
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
 	
-	private String name;
+	
+    private String name;
 	
 	private String surname;
 	
@@ -26,22 +18,12 @@ public class Client {
 	
 	private String password;
 
-	public Client(int id, String name, String surname, String mail, String address, String phoneNumber, String userName,
-			String password) {
+	public ClientDTO() {
 		super();
-		this.id = id;
-		this.name = name;
-		this.surname = surname;
-		this.mail = mail;
-		this.address = address;
-		this.phoneNumber = phoneNumber;
-		this.userName = userName;
-		this.password = password;
+		
 	}
-	
-	
 
-	public Client(String name, String surname, String mail, String address, String phoneNumber, String userName,
+	public ClientDTO(String name, String surname, String mail, String address, String phoneNumber, String userName,
 			String password) {
 		super();
 		this.name = name;
@@ -51,20 +33,6 @@ public class Client {
 		this.phoneNumber = phoneNumber;
 		this.userName = userName;
 		this.password = password;
-	}
-
-
-
-	public Client() {
-		super();
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getName() {
@@ -122,7 +90,10 @@ public class Client {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	
+	
+	
 	
 	
 }
+

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bankaApp.DTOS.ClientDTO;
 import com.bankaApp.Model.ATM;
 import com.bankaApp.Model.Branch;
 import com.bankaApp.Model.Client;
@@ -50,6 +51,12 @@ public class ClientService {
     	
     	Client client = clientRepository.findByMailAndPassword(mail, password);
     	return client;
+    }
+    
+    public Client createClient(ClientDTO clientDto) {
+    	Client client = new Client(clientDto.getName(),clientDto.getSurname(),clientDto.getMail(),clientDto.getAddress(),
+    			clientDto.getPhoneNumber(),clientDto.getUserName(),clientDto.getPassword());
+    	return clientRepository.save(client);
     }
 
 
