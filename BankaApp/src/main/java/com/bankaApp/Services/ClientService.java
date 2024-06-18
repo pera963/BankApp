@@ -58,6 +58,30 @@ public class ClientService {
     			clientDto.getPhoneNumber(),clientDto.getUserName(),clientDto.getPassword());
     	return clientRepository.save(client);
     }
-
+    public Client updateClient(int id,ClientDTO clientDTO) {
+    	Client client= clientRepository.findById(id);
+    	if(client==null) {
+    		return null;
+    	}
+    	client.setName(clientDTO.getName());
+    	client.setSurname(clientDTO.getSurname());
+    	client.setMail(clientDTO.getMail());
+    	client.setAddress(clientDTO.getAddress());
+    	client.setPhoneNumber(clientDTO.getPhoneNumber());
+    	client.setUserName(clientDTO.getUserName());
+    	client.setPassword(clientDTO.getPassword());
+    	return clientRepository.save(client);
+    }
+    
+    public Client deleteClient(int id){
+    	
+    	Client client = clientRepository.findById(id);
+        if(client==null) {
+    	   return null;
+    	}
+        clientRepository.delete(client);
+        return client;
+    }
+         
 
 }

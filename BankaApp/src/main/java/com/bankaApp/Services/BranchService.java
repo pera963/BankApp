@@ -40,4 +40,16 @@ public class BranchService {
 		   branch.setPhoneNumber(branchDTO.getPhoneNumber());
 		   return branchRepository.save(branch);
 	 }
+	 
+	 public Branch updateBranch(int id, BranchDTO branchDTO) {
+		   Branch branch = branchRepository.findById(id);
+		   if(branch==null) {
+			   return null;
+		   }
+		   branch.setName(branchDTO.getName());
+		   branch.setAddress(branchDTO.getAddress());
+		   branch.setCity(branchDTO.getCity());
+		   branch.setPhoneNumber(branchDTO.getPhoneNumber());
+		   return branchRepository.save(branch);
+	 }
 }

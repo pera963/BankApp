@@ -5,14 +5,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bankaApp.DTOS.BranchDTO;
 import com.bankaApp.DTOS.ClientDTO;
 import com.bankaApp.Model.ATM;
 import com.bankaApp.Model.Branch;
@@ -20,6 +23,10 @@ import com.bankaApp.Model.Client;
 import com.bankaApp.Services.BranchService;
 import com.bankaApp.Services.ClientService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+@Tag(name="Client",description="Client Apis")
 @RestController
 @RequestMapping("/api/client")
 public class ClientController {
@@ -34,6 +41,7 @@ public class ClientController {
 	    	  return new ResponseEntity<List<Client>>(client,HttpStatus.OK);
 	    }
 	 
+	 @Operation(summary="Get Client by Id",description="Get a client object by specifying Id")
 	 @GetMapping("/{id}")
 		public ResponseEntity<Client> getClientById(@PathVariable int id){                     //kada ide samo jedna pretraga po ID onda ide @PathVariable
 			Client client = clientService.getClientById(id);
@@ -114,6 +122,28 @@ public class ClientController {
     	   }
        }
 
+       @PutMapping("/{id}")
+  	 public ResponseEntity<Client> updateClient(@PathVariable int id,@RequestBody ClientDTO clientDTO){
+  		   Client client = clientService.updateClient(id, clientDTO);
+  		   if(client==null) {
+  			   return new ResponseEntity<Client>(HttpStatus.BAD_REQUEST);
+  		   }
+  		   else {
+  			   return new ResponseEntity<Client>(client,HttpStatus.OK);
+  		   }
+  			   
+  	 }
+       
+       @DeleteMapping("/{id}")
+       public ResponseEntity<Client> deleteClient(@PathVariable int id){
+    	   Client client = clientService.deleteClient(id);
+    	   if(client==null) {
+  			   return new ResponseEntity<Client>(HttpStatus.NOT_FOUND);
+  		   }
+  		   else {
+  			   return new ResponseEntity<Client>(client,HttpStatus.OK);
+  		   }
+       }
 
 
 

@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,7 +34,7 @@ public class BranchController {
 	    }
 	
 	 @GetMapping("/{id}")
-	    public ResponseEntity<Branch> getBranchById(@PathVariable int id){       // @PathVariable - pokupi iz putanje id,koji 'emo mi proslediti u servis
+	    public ResponseEntity<Branch> getBranchById(@PathVariable int id){       // @PathVariable - pokupi iz putanje id,koji ćemo mi proslediti u servis
 	    	Branch branch = branchService.getBranchById(id);
 	    	if(branch==null) {
 	    	return new ResponseEntity<Branch>(HttpStatus.NOT_FOUND);            // ResponseEntity<Account> response = new ResponseEntity<Account>(HttpStatus.NOT_FOUND);
@@ -66,6 +67,18 @@ public class BranchController {
 		   else {
 			   return new ResponseEntity<Branch>(branch,HttpStatus.OK);
 		   }
+	 }
+	 
+	 @PutMapping("/{id}")
+	 public ResponseEntity<Branch> updateBranch(@PathVariable int id,@RequestBody BranchDTO branchDTO){
+		   Branch branch = branchService.updateBranch(id, branchDTO);
+		   if(branch==null) {
+			   return new ResponseEntity<Branch>(HttpStatus.BAD_REQUEST);
+		   }
+		   else {
+			   return new ResponseEntity<Branch>(branch,HttpStatus.OK);
+		   }
+			   
 	 }
 
 

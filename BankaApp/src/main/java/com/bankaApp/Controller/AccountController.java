@@ -7,11 +7,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bankaApp.DTOS.AccountDTO;
+import com.bankaApp.DTOS.ClientDTO;
 import com.bankaApp.Model.Account;
+import com.bankaApp.Model.Client;
 import com.bankaApp.Services.AccountService;
 
 @RestController
@@ -51,6 +57,42 @@ public class AccountController {
     	List<Account> accounts = accountService.getAllAccountByAccountTypeDev();
     	return new ResponseEntity<List<Account>>(accounts,HttpStatus.OK);
     }
+    @PostMapping
+    public ResponseEntity<Account> createAccount(@RequestBody AccountDTO accountDTO){
+    	Account account = accountService.createAccount(accountDTO);
+    	if(account==null) {
+    		return new ResponseEntity<Account>(HttpStatus.BAD_REQUEST); 
+    	}
+    	else {
+    		return new ResponseEntity<Account>(account,HttpStatus.OK);
+    	}
+    }
+    
+    @PutMapping("/changeStatus/{id}")
+    public ResponseEntity<Account> changeStatus(@PathVariable int id){
+    	Account account = accountService.updateStatus(id);
+    	if(account==null) {
+    		return new ResponseEntity<Account>(HttpStatus.BAD_REQUEST); 
+    	}
+    	else {
+    		return new ResponseEntity<Account>(account,HttpStatus.OK);
+    	}
+    }
+
+   /* @PutMapping("/{id}")
+ 	 public ResponseEntity<Account> updateAccount(@PathVariable int id,@RequestBody AccountDTO accountDTO){
+ 		   Account account = accountService.updateAccount(id, accountDTO);
+ 		   if(account==null) {
+ 			   return new ResponseEntity<account>(HttpStatus.BAD_REQUEST);
+ 		   }
+ 		   else {
+ 			   return new ResponseEntity<Client>(client,HttpStatus.OK);
+ 		   }
+ 			   
+ 	 }*/
+      
+
+
 }
 
 

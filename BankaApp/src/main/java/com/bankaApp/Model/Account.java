@@ -1,5 +1,8 @@
 package com.bankaApp.Model;
 
+
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,7 +24,7 @@ public class Account {
 	
 	private double balance;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Client client;
 
 	public Account(int id, String accountNumber, boolean status, String accountType, double balance, Client client) {
@@ -85,7 +88,7 @@ public class Account {
 	public void setClient(Client client) {
 		this.client = client;
 	}
-
+  
 	
 	
 }
