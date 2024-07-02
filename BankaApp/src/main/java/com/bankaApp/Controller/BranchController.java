@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bankaApp.DTOS.BranchDTO;
 import com.bankaApp.Model.ATM;
 import com.bankaApp.Model.Branch;
+import com.bankaApp.Model.Client;
 import com.bankaApp.Services.BranchService;
 
 @RestController
@@ -80,6 +82,17 @@ public class BranchController {
 		   }
 			   
 	 }
+
+	 @DeleteMapping("/{id}")
+     public ResponseEntity<Branch> deleteBranch(@PathVariable int id){
+		 Branch branch = branchService.deleteBranch(id);
+  	   if(branch==null) {
+			   return new ResponseEntity<Branch>(HttpStatus.NOT_FOUND);
+		   }
+		   else {
+			   return new ResponseEntity<Branch>(branch,HttpStatus.OK);
+		   }
+     }
 
 
 }

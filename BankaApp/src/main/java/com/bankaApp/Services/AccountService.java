@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bankaApp.DTOS.AccountDTO;
+import com.bankaApp.DTOS.ClientDTO;
 import com.bankaApp.Model.Account;
+import com.bankaApp.Model.Branch;
 import com.bankaApp.Model.Client;
 import com.bankaApp.repositories.AccountRepository;
 import com.bankaApp.repositories.ClientRepository;
@@ -72,7 +74,35 @@ public class AccountService {
 			account.setStatus(true);
 		}
 		return accountRepository.save(account);
-	} 
+	}
+	
+	
+	 public Account updateAccount(int id,AccountDTO accountDTO) {
+	    	Account account= accountRepository.findById(id);
+	    	if(account==null) {
+	    		return null;
+	    	}
+	    	Client client = clientRepository.findById(accountDTO.getClient_Id());
+			if(client==null) {
+				return null;
+			}   	
+	    	account.setAccountNumber(accountDTO.getAccountNumber());
+	    	account.setStatus(accountDTO.isStatus());
+	    	account.setAccountType(accountDTO.getAccountType());
+	    	account.setBalance(accountDTO.getBalance());
+	    	account.setClient(client);
+	      	return accountRepository.save(account);
+	    }
+	 
+	 public Account deleteAccount(int id){
+	    	
+		 Account account = accountRepository.findById(id);
+	        if(account==null) {
+	    	   return null;
+	    	}
+	        accountRepository.delete(account);
+	        return account;
+	    }
 	
 }
 

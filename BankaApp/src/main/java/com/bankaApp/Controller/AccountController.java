@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -79,17 +80,28 @@ public class AccountController {
     	}
     }
 
-   /* @PutMapping("/{id}")
+    @PutMapping("/{id}")
  	 public ResponseEntity<Account> updateAccount(@PathVariable int id,@RequestBody AccountDTO accountDTO){
  		   Account account = accountService.updateAccount(id, accountDTO);
  		   if(account==null) {
- 			   return new ResponseEntity<account>(HttpStatus.BAD_REQUEST);
+ 			   return new ResponseEntity<Account>(HttpStatus.BAD_REQUEST);
  		   }
  		   else {
- 			   return new ResponseEntity<Client>(client,HttpStatus.OK);
+ 			   return new ResponseEntity<Account>(account,HttpStatus.OK);
  		   }
  			   
- 	 }*/
+ 	 }
+    
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Account> deleteAccount(@PathVariable int id){
+    	Account account = accountService.deleteAccount(id);
+ 	   if(account==null) {
+			   return new ResponseEntity<Account>(HttpStatus.NOT_FOUND);
+		   }
+		   else {
+			   return new ResponseEntity<Account>(account,HttpStatus.OK);
+		   }
+    }
       
 
 

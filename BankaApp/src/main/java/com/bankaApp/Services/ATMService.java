@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.bankaApp.DTOS.ATMDTO;
 import com.bankaApp.Model.ATM;
 import com.bankaApp.Model.Branch;
+import com.bankaApp.Model.Client;
 import com.bankaApp.repositories.ATMRepository;
 import com.bankaApp.repositories.BranchRepository;
 
@@ -99,6 +100,16 @@ public class ATMService {
 		return atmRepository.save(atm);	
 			
 	}
+	
+     public ATM deleteATM(int id){
+    	
+    	ATM atm = atmRepository.findById(id);
+        if(atm==null) {
+    	   return null;
+    	}
+        atmRepository.delete(atm);
+        return atm;
+    }
 	
 	
 

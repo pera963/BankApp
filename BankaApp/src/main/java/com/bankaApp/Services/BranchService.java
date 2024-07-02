@@ -52,4 +52,15 @@ public class BranchService {
 		   branch.setPhoneNumber(branchDTO.getPhoneNumber());
 		   return branchRepository.save(branch);
 	 }
+	 
+	 public Branch deleteBranch(int id){
+	    	
+		 Branch branch = branchRepository.findById(id);
+	        if(branch==null) {
+	    	   return null;
+	    	}
+	        branchRepository.delete(branch);
+	        return branch;
+	    }
 }
+
