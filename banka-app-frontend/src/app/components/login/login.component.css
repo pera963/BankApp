@@ -1,0 +1,10 @@
+.forma {
+    max-width: 350px;
+    border: 1px solid blue;
+    border-radius: 5px;
+    padding: 10px;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
