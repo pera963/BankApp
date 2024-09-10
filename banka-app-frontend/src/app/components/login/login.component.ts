@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ClientService } from '../../services/Client/client.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+
 
 
 
@@ -14,7 +16,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit{
   mail: string="";
   password: string="";
-  constructor(private clientService: ClientService, private router: Router){}
+  constructor(private clientService: ClientService, private router: Router,private toastr:ToastrService){}
   ngOnInit(): void {
   }
 
@@ -24,11 +26,15 @@ export class LoginComponent implements OnInit{
      return; 
     }
     this.clientService.login(this.mail,this.password).subscribe((res: any)=>{
-     console.log(res);
-     alert ("uspešno");
+     //console.log(res);
+     //alert ("uspešno");
+     this.toastr.success("Uspešna prijava na aplikaciju");
+     setTimeout(() => {
      this.router.navigate(['/home']);
-    }, (err: HttpErrorResponse)=>{
-      alert("došlo je do greške prilikom logovanja: "+this.mail+" "+this.password);
+     }, 500);
+     }, (err: HttpErrorResponse)=>{
+      //alert("došlo je do greške prilikom logovanja: "+this.mail+" "+this.password);
+      this.toastr.error("Došlo je do greške prilikom logovanja");
     })
       
   }
