@@ -12,6 +12,8 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ToastrModule } from 'ngx-toastr';
+import { ATMComponent } from './components/atm/atm.component';
+import { FilijalaComponent } from './components/filijala/filijala.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { ToastrModule } from 'ngx-toastr';
     RegistrationComponent,
     HomePageComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ATMComponent,
+    FilijalaComponent
   ],
   imports: [
     BrowserModule,

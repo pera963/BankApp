@@ -13,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit{ //odmah se izvršava ova metoda interfejza ngOnInit()
   mail: string="";
   password: string="";
   constructor(private clientService: ClientService, private router: Router,private toastr:ToastrService){}
@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit{
      //console.log(res);
      //alert ("uspešno");
      this.toastr.success("Uspešna prijava na aplikaciju");
+     localStorage.setItem("mail",this.mail);
      setTimeout(() => {
      this.router.navigate(['/home']);
      }, 500);
