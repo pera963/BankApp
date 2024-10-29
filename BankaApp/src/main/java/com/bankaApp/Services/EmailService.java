@@ -1,0 +1,34 @@
+package com.bankaApp.Services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Service;
+
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
+
+@Service
+public class EmailService {
+    @Autowired
+	private JavaMailSender javaMailSender;
+    
+    public void sendEmail(String toEmail,String subject,String body){
+    	//SimpleMailMessage message=new SimpleMailMessage();
+    	
+    	try {
+    		MimeMessage mimeMessage=javaMailSender.createMimeMessage();
+        	MimeMessageHelper mimeMessageHelper=new MimeMessageHelper(mimeMessage,"utf-8");
+			mimeMessageHelper.setFrom("rgsilikat@gmail.com");
+			mimeMessageHelper.setTo(toEmail);
+	    	mimeMessageHelper.setText(body,true);
+	    	mimeMessageHelper.setSubject(subject);
+	    	javaMailSender.send(mimeMessage);
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    }
+ }

@@ -21,6 +21,7 @@ import com.bankaApp.DTOS.ClientDTO;
 import com.bankaApp.Model.Account;
 import com.bankaApp.Model.Client;
 import com.bankaApp.Services.AccountService;
+import com.bankaApp.Services.EmailService;
 
 @RestController
 @CrossOrigin(origins="http://localhost:4200") 
@@ -29,6 +30,7 @@ public class AccountController {
     @Autowired
 	private AccountService accountService;
     
+        
     @GetMapping
     public ResponseEntity<List<Account>> getAllAccount(){
     	
@@ -67,7 +69,7 @@ public class AccountController {
     		return new ResponseEntity<Account>(HttpStatus.BAD_REQUEST); 
     	}
     	else {
-    		return new ResponseEntity<Account>(account,HttpStatus.OK);
+    	    return new ResponseEntity<Account>(account,HttpStatus.OK);
     	}
     }
     

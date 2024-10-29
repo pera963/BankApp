@@ -23,6 +23,7 @@ import com.bankaApp.Model.Branch;
 import com.bankaApp.Model.Client;
 import com.bankaApp.Services.BranchService;
 import com.bankaApp.Services.ClientService;
+import com.bankaApp.Services.EmailService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -35,6 +36,9 @@ public class ClientController {
 
 	@Autowired
 	private ClientService clientService;
+	
+	@Autowired
+    private EmailService emailService;
 	
 	 @GetMapping
 	    public ResponseEntity<List<Client>> getAllClient(){
@@ -119,6 +123,15 @@ public class ClientController {
     		   return new ResponseEntity<Client>(HttpStatus.BAD_REQUEST);   
     	   }
     	   else {
+    		   
+    		  // String body="Poštovani, " + client.getName() + " Uspešno ste se registrovali ";
+    		   String body = "<html><body style='font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px;'>"
+    			        + "<div style='background-color: #ffffff; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);'>"
+    			        + "<h1 style='color: #333;'>Poštovani,</h1>"
+    			        + "<p style='color: #555;'>Uspešno ste se registrovali!</p>"
+    			        + "<p style='color: #555;'>Hvala vam što ste se pridružili našoj aplikaciji.</p>"
+    			        + "</div></body></html>";
+    		   emailService.sendEmail(client.getMail()," Potvrda registracije" , body);
     		   return new ResponseEntity<Client>(client,HttpStatus.OK);   
     		   
     	   }
