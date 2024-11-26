@@ -25,9 +25,11 @@ public class Client {
 	private String userName;
 	
 	private String password;
+	
+	private boolean status; 
 
 	public Client(int id, String name, String surname, String mail, String address, String phoneNumber, String userName,
-			String password) {
+			String password, boolean status) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -37,12 +39,13 @@ public class Client {
 		this.phoneNumber = phoneNumber;
 		this.userName = userName;
 		this.password = password;
+		this.status=status;
 	}
 	
 	
 
 	public Client(String name, String surname, String mail, String address, String phoneNumber, String userName,
-			String password) {
+			String password,boolean status) {
 		super();
 		this.name = name;
 		this.surname = surname;
@@ -51,6 +54,8 @@ public class Client {
 		this.phoneNumber = phoneNumber;
 		this.userName = userName;
 		this.password = password;
+		this.status=status;
+		
 	}
 
 
@@ -121,6 +126,18 @@ public class Client {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+
+
+	public boolean isStatus() {
+		return status;
+	}
+
+
+
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 
 	
