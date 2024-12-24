@@ -61,4 +61,19 @@ public class ImageStorageController {
                              .contentType(MediaType.APPLICATION_JSON)
                              .body(base64Images);
     }
+    
+    @GetMapping("/zip/images")
+    public ResponseEntity<byte[]> downloadImagesZip() {
+        try {
+            byte[] zipData = imageStorageService.downloadImagesAsZip();
+
+            return ResponseEntity.ok()
+                    .contentType(MediaType.parseMediaType("application/zip"))
+                    .header("Content-Disposition", "attachment; filename=\"images.zip\"")
+                    .body(zipData);
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error generating ZIP file.".getBytes());
+        }
+    }
 }

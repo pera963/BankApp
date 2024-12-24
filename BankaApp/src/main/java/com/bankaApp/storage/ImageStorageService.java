@@ -1,8 +1,11 @@
 package com.bankaApp.storage;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,4 +52,28 @@ public class ImageStorageService {
         }
         return images;
     }
+	
+	public byte[] downloadImagesAsZip() throws IOException {
+
+        List<ImageStorage> imagesData = imageStorageRepository.findAll();
+
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+
+        try (ZipOutputStream zipOutputStream = new ZipOutputStream(byteArrayOutputStream)) {
+            for (ImageStorage image : imagesData) {
+                byte[] imageData = ImageStorageUtils.decompressImage(image.getImage());
+
+                ZipEntry zipEntry = new ZipEntry(image.getName());
+                zipOutputStream.putNextEntry(zipEntry);
+
+                zipOutputStream.write(imageData);
+                zipOutputStream.closeEntry();
+            }
+        }
+
+        return byteArrayOutputStream.toByteArray();
+    }
+
+
+
 }
