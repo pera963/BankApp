@@ -1,10 +1,18 @@
 package com.bankaApp.Services;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.bankaApp.DTOS.ClientDTO;
@@ -16,7 +24,7 @@ import com.bankaApp.repositories.ClientRepository;
 import com.bankaApp.repositories.EmailTokenRepository;
 
 @Service
-public class ClientService {
+public class ClientService implements UserDetailsService{
 	
 	@Autowired
 	private ClientRepository clientRepository;
@@ -26,6 +34,9 @@ public class ClientService {
 	
 	@Autowired
     private EmailService emailService;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	
 	public List<Client> getAllClient (){
@@ -69,7 +80,7 @@ public class ClientService {
     
     public Client createClient(ClientDTO clientDto) {
     	Client client = new Client(clientDto.getName(),clientDto.getSurname(),clientDto.getMail(),clientDto.getAddress(),
-    			clientDto.getPhoneNumber(),clientDto.getUserName(),clientDto.getPassword(),false);
+    			clientDto.getPhoneNumber(),clientDto.getUserName(),passwordEncoder.encode(clientDto.getPassword()),false);
     	String token=UUID.randomUUID().toString();
     	EmailToken emailToken=new EmailToken(token,LocalDateTime.now(),LocalDateTime.now().plusMinutes(30),client);
     	emailTokenRepository.save(emailToken);
@@ -127,6 +138,17 @@ public class ClientService {
 		emailTokenRepository.save(emailToken);
 		clientRepository.save(client);
 		return "Uspešno ste potvrdili  vaš E-mail";
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		Client client=clientRepository.findByMail(email);
+		if(client==null) {
+			throw new  UsernameNotFoundException("client not found");
+		}
+		Collection<SimpleGrantedAuthority> authority = new ArrayList<>();
+		authority.add(new SimpleGrantedAuthority("ROLE_CLIENT"));
+		return new User(client.getMail(),client.getPassword(), authority);
 	}
          
 

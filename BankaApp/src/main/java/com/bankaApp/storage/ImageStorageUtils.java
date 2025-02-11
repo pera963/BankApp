@@ -18,6 +18,8 @@ public class ImageStorageUtils {
             while(!deflater.finished()) {
                 int size = deflater.deflate(temp);
                 outputStream.write(temp, 0, size);
+                		
+                
             }
             outputStream.close();
         } catch(Exception ex) {
