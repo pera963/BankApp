@@ -31,7 +31,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Tag(name="Client",description="Client Apis")
 @RestController
-@RequestMapping("/api/client")
+@RequestMapping("/api/client") 
 //@CrossOrigin(origins="http://localhost:4200") 
 public class ClientController {
 
