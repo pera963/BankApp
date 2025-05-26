@@ -1,9 +1,35 @@
 German
 
-Dieses Projekt wurde erstellt, um die Verbindung zwischen dem Angular-Frontend und dem Java Spring Boot-Backend mit der MySQL-Datenbank auf einfache Weise darzustellen. Es befasst sich mit Geldtransaktionen von Kunden einer Bank mit mehreren Filialen, die über eigene Geldabhebungsautomaten verfügen. Folgende Konten wurden erstellt: Konto, Administrator, Geldautomat, Filiale, Kunde und E-Mail-Token. Anmeldung und Registrierung wurden durchgeführt. Die Kontoverifizierung erfolgt per E-Mail. Authentifizierung und Autorisierung wurden durchgeführt.
+💳 Bank-App – Full-Stack-Projekt mit Angular und Spring Boot
+
+Dieses Projekt demonstriert die Integration zwischen dem Angular-Frontend, dem Java Spring Boot-Backend und einer MySQL-Datenbank.
+Es simuliert Geldtransaktionen für Kunden einer Bank mit mehreren Filialen, die jeweils über eigene Geldautomaten verfügen.
+
+Die Anwendung umfasst die folgenden Module:
+Konto, Admin, Geldautomat, Filiale, Kunde, E-Mail-Token.
+Hauptfunktionen:
+- Benutzerregistrierung und -anmeldung
+- E-Mail-basierte Kontoverifizierung
+- Authentifizierung und Autorisierung
+Das Projekt veranschaulicht Kernkonzepte der Full-Stack-Webanwendungsentwicklung.
 
 English
 
-This project was created to show in a simple way the connection between the frontend of Angular and the backend of Java Spring Boot with the MySQL database. It deals with money transactions of clients of one bank with several branches that have their own machines for withdrawing money. They were created: Account, Admin, ATM, Branch, Client, EmailToken.Login and registration were done . Account verification is done via E-mail. Authentication and authorization were done.
+ 💳 BankApp – Full-Stack Project with Angular & Spring Boot
+
+This project was created to demonstrate the integration between the Angular frontend,Java Spring Boot backend, and a MySQL database.
+It simulates money transactions for clients of a bank with multiple branches, each equipped with its own ATM machines.
+
+The application includes the following modules:
+Account, Admin, ATM, Branch, Client, EmailToken.
+Key features:
+- User registration and login
+- Email-based account verification
+- Authentication and authorization
+The project is designed to illustrate core concepts in full-stack web application development.
+
+
+
+
 
 
